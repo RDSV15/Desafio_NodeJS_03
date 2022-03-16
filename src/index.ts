@@ -39,56 +39,51 @@ app.listen(PORT, () => {
 	// CÓDIGO PARA ATENDER OS REQUERIMENTOS
 	// R01, R02, R03, R04, R05
 	
-	const arr = [
-		{nome: 'João', nota: 7},
-		{nome: 'Pedro', nota: 5},
-		{nome: 'Gabriel', nota: 7.5},
-		{nome: 'José', nota: 9},
-		{nome: 'Tiago', nota: 8.4},
-		{nome: 'André', nota: 8.6}
-	];
-	const count = arr.filter(Boolean).length;
-	//1,1
 
-	var readline = require('readline');
-	var resp = "";
-	//
-	var leitor = readline.createInterface({
+	const readline = require('readline');
+		const leitor = readline.createInterface({
     	input: process.stdin,
     	output: process.stdout
 	});
-	//2,1
 
-	const maxnota = arr.sort((val1,val2)=> {
+	const conj: any[] = [];
+	const conjn: any[] = [];
+
+	leitor.question('Digite a quantidade de alunos: ', async (quantidade: number) => {
+    	for(let i = 0; i < quantidade; i++) {
+        	
+       	 	await new Promise((resolve) => { 
+            	leitor.question(`Digite o seu nome ${i}: `, (nome: any) => {
+                	resolve(conj.push(nome)); 
+					
+            	});
+        	});
+
+			{
+       	 		await new Promise((resolve) => { 
+            		leitor.question(`Digite sua nota ${i}: `, (nota: any) => {
+                		resolve(conjn.push(nota)); 
+					
+            		});
+        		});
+
+    		}
+		}
+		leitor.close();
+    	console.log(conj);
+		console.log(conjn);
+	
+		const maxnota = conjn.sort((val1,val2)=> {
 		return (val1.nota < val2.nota ) ? 1 : -1
-	})[0];
-	//4,1
-	
-	console.log('Qual a quantidade de alunos?');
-	//
-	console.log(count);
-	//1,2
+		})[0];
+		console.log('qual foi a maior nota?')
+		console.log(maxnota);
 
-	leitor.question("Qual o seu nome?\n", function(answer: any) {
-    	var resp = answer;
-    	console.log("\nSua resposta '" + resp + "' foi armazenada");
-    	//
-		leitor.question("Olá " + resp + ", qual sua nota?\n", function(answer: any) {
-			var nota = answer;
-			console.log("\nSua resposta '" + nota + "' foi armazenada");
-			leitor.close();
-			//
-			console.log("Muito obrigado " + resp + ", pela sua resposta");
-			//3,2
-
-			console.log('Qual o aluno com a maior nota?');
-			//
-			console.log(maxnota);	
-			//4,2
-	
-		});
 	});
 
+
 });
+	
+
 
 	
